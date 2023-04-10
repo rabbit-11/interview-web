@@ -47,7 +47,19 @@ module.exports = {
 				`
             }
         }
+    },
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'http://gptinterview.ai',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
     }
 
     // 第三方插件配置 https://www.npmjs.com/package/vue-cli-plugin-style-resources-loader
+
 };

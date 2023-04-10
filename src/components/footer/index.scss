@@ -1,0 +1,56 @@
+footer {
+    @include size(100%, 356px);
+    background-color: #161929;
+    position: relative;
+    .introduce {
+        @include flex(column);
+        position: absolute;
+        width: 50%;
+        text-align: left;
+        top: 64px;
+        left: 10%;
+        color: #fff;
+        .title {
+            @include flex(row);
+            margin-bottom: 10px;
+            &-icon {
+                @include size(56px, 56px);
+                @include bg-img("~@/assets/images/logo.png");
+                margin-right: 10px;
+            }
+            &-name {
+                font-style: normal;
+                font-weight: 600;
+                font-size: 32px;
+            }
+        }
+    }
+    .copyright {
+        position: absolute;
+        left: 50%;
+        bottom: 48px;
+        transform: translateX(-50%);
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        color: #FFFFFF;
+    }
+    .social-list {
+        position: absolute;
+        right: 132px;
+        bottom: 48px;
+        .ant-btn {
+            @include size(48px, 48px);
+            background-color: #474747;
+            border-radius: 50%;
+            border: none;
+            margin-right: 10px;
+            img {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+}

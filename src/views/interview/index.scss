@@ -1,0 +1,115 @@
+.interview {
+    @include size(100%, 100%);
+    @include flex(row);
+    .communicate {
+        @include size(40%, 100%);
+        .message-box {
+            @include size(100%, calc(100% - 160px));
+            @include flex(column);
+            padding: 64px 24px 24px 24px;
+            background-color: #F6F6F6;
+            border: 1px solid #EDF0F6;
+            overflow: auto;
+
+            .message-item {
+                @include size(70%, auto);
+                @include flex(column);
+                margin-bottom: 10px;
+                
+                .time {
+                    margin-left: 56px;
+                    font-weight: 500;
+                    font-size: 12px;
+                    color: #868686;
+                }
+                .content {
+                    @include size(100%, auto);
+                    @include flex(row);
+                    .avatar {
+                        @include size(48px, 48px);
+                        border-radius: 24px;
+                        background-color: #EB5757;
+                        margin-right: 8px;
+                        align-self: flex-start;
+                        vertical-align: top;
+                    }
+                    .message {
+                        min-height: 48px;
+                        min-width: 10px;
+                        max-width: calc(100% - 80px);
+                        background-color: #FFFFFF;
+                        border-radius: 0px 10px 10px 10px;
+                        padding: 12px 16px;
+                        text-align: left;
+                    }
+                }
+            }
+
+            .right {
+                align-self: flex-end;
+                .time {
+                    align-self: flex-end;
+                    margin-right: 64px;
+                }
+                .content {
+                    justify-content: flex-end;
+                    .avatar {
+                        order: 2;
+                        margin-left: 8px;
+                        background-color: #0060FF;
+                    }
+                    .message {
+                        order: 1;
+                        background-color: #0060FF;
+                        border-radius: 10px 0 10px 10px;
+                        color: #FFFFFF;
+                    }
+                }
+            }
+        }
+        .send-box {
+            @include size(100%, 160px);
+            border: 1px solid #EDF0F6;
+        }
+    }
+    
+    .code {
+        @include size(60%, 100%);
+        .coder {
+            @include size(100%, calc(100% - 160px));
+            border: 1px solid #EDF0F6;
+            background-color: black;
+        }
+        .toolbar {
+            @include size(100%, 160px);
+            @include flex(row, space-between, center);
+            border: 1px solid #EDF0F6;
+            padding: 0 24px;
+            
+            .tool-list {
+                height: 160px;
+                @include flex(row, flex-start, center);
+                .tool-btn {
+                    @include size(48px, 48px);
+                    border-radius: 24px;
+                    border: none;
+                    background-color: #DFEBFF;
+                    margin-right: 24px;
+                    img {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            .end-btn {
+                height: 40px;
+                background-color: #EB5757;
+                border-radius: 20px;
+                border: none;
+                color: #fff;
+            }
+        }
+    }
+}

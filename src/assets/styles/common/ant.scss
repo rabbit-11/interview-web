@@ -671,15 +671,6 @@ $color-primary: $--color-primary;
     &.ant-tree li .ant-tree-node-content-wrapper:hover {
         background-color: unset;
     }
-    
-    .army-add {
-        float: right;
-        width: .14rem;
-        height: .14rem;
-        margin: .05rem 0 0 0;
-        background: url("~@/assets/images/header/action/add.png");
-        background-size: 100%;
-    }
 
     &-title {
         display: inline-block;
@@ -705,7 +696,6 @@ $color-primary: $--color-primary;
 
             .container {
                 &:hover {
-                    background-image: url("~@/assets/images/map/selectedBorder.png");
                     background-size: 100% 100%;
                     opacity: 0.6;
                 }
@@ -715,7 +705,6 @@ $color-primary: $--color-primary;
             background-color: rgba(0, 0, 0, 0) !important;
 
             .container {
-                background-image: url("~@/assets/images/map/selectedBorder.png");
                 background-size: 100% 100%;
             }
         }

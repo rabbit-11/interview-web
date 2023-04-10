@@ -1,0 +1,64 @@
+.home {
+    overflow-y: auto;
+    .page {
+        position: relative;
+        @include size(100%, 727px);
+        &:first-child {
+            height: 960px;
+        }
+    }
+    .page1 {
+        .introduce {
+            @include size(62.5%, 250px);
+            @include flex(column, space-evenly, center);
+            position: absolute;
+            top: 160px;
+            left: 50%;
+            transform: translateX(-50%);
+            p {
+                width: 80%;
+            }
+            .ant-btn {
+                height: 40px;
+                border-radius: 20px;
+                background-color: #0060FF;
+                margin-top: 30px;
+            }
+        }
+    }
+    .page2 {
+        .introduce {
+            @include size(40%, 300px);
+            @include flex(column, space-evenly, flex-start);
+            position: absolute;
+            top: 200px;
+            left: 10%;
+            text-align: left;
+        }
+    }
+    .page3 {
+        background-color: #0060FF;
+        color: #fff;
+        h3 {
+            color: #fff;
+        }
+        .introduce {
+            @include size(40%, 300px);
+            @include flex(column, space-evenly, flex-start);
+            position: absolute;
+            top: 200px;
+            right: 10%;
+            text-align: left;
+        }
+    }
+    .page4 {
+        .introduce {
+            @include size(40%, 300px);
+            @include flex(column, space-evenly, flex-start);
+            position: absolute;
+            top: 200px;
+            left: 10%;
+            text-align: left;
+        }
+    }
+}

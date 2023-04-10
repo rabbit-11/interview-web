@@ -11,6 +11,15 @@ export const appRouter: Array<RouteRecordRaw> = [
             title: "首页"
         },
         component: () => import("../views/home/index.vue")
+    },
+    {
+        path: "/interview",
+        name: "interview",
+        meta: {
+            icon: "user-outlined",
+            title: "面试"
+        },
+        component: () => import("../views/interview/index.vue")
     }
 ];
 const routes: Array<RouteRecordRaw> = [
@@ -21,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: "/",
-        name: "home",
+        name: "main",
         component: BlankWarpper,
         meta: {
             title: "首页"
