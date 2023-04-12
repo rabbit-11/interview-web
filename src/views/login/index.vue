@@ -61,11 +61,13 @@ const formState = reactive<FormState>({
 const onFinish = (values: any) => {
     console.log('Success:', values);
     service.login(values).then((res: any) => {
-        if (res.code == 1) {
+        console.log(res)
+        if (res.code === 1) {
             store.setUserInfo({
                 user: formState.email,
                 access_token: res.token
             })
+            console.log("update")
             router.push({
                 name: "interview"
             })

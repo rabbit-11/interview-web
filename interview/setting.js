@@ -1,5 +1,5 @@
 window.commonSetting = {
-    baseUrl: "http://localhost:8080/api",
+    baseUrl: "http://127.0.0.1/api",
 };
 /**
  * 初始化屏幕分辨率

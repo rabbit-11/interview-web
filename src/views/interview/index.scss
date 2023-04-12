@@ -1,8 +1,9 @@
 .interview {
     @include size(100%, 100%);
-    @include flex(row);
     .communicate {
         @include size(40%, 100%);
+        position: absolute;
+        left: 60%;
         .message-box {
             @include size(100%, calc(100% - 160px));
             @include flex(column);
@@ -41,6 +42,7 @@
                         border-radius: 0px 10px 10px 10px;
                         padding: 12px 16px;
                         text-align: left;
+                        white-space: break-spaces;
                     }
                 }
             }
@@ -70,21 +72,70 @@
         .send-box {
             @include size(100%, 160px);
             border: 1px solid #EDF0F6;
+            textarea {
+                height: 100%;
+                border: none;
+                resize: none;
+            }
+            .send-btn {
+                @include absolute(unset, 24px, 12px, unset);
+                background-color: #0060FF;
+            }
         }
     }
     
     .code {
         @include size(60%, 100%);
+        position: absolute;
+        z-index: 3;
+        transition: all .2s ease;
         .coder {
             @include size(100%, calc(100% - 160px));
+            position: relative;
+            padding: 64px 0 0 0;
             border: 1px solid #EDF0F6;
-            background-color: black;
+            // background-color: black;
+            .submit-btn {
+                @include absolute(76px, 24px, unset, unset);
+                background-color: #0060FF;
+            }
+            .expand-btn {
+                @include absolute(50%, -16px, unset, unset);
+                width: 16px;
+                height: 64px;
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 0 5px 5px 0;
+                padding: 0;
+                color: #fff;
+                display: none;
+            }
+            .toggle-btn {
+                @extend .expand-btn;
+                @include absolute(50%, 0, unset, unset);
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 5px 0 0 5px;
+            }
+            &:hover {
+                .expand-btn,.toggle-btn {
+                    display: block;
+                }
+            }
+            .video-box {
+                @include size(360px, 240px);
+                @include absolute(unset, 16px, 16px, unset);
+                border: 2px solid #FFFFFF;
+                border-radius: 8px;
+                video {
+                    @include size(100%, 100%);
+                }
+            }
         }
         .toolbar {
             @include size(100%, 160px);
             @include flex(row, space-between, center);
             border: 1px solid #EDF0F6;
             padding: 0 24px;
+            background-color: #fff;
             
             .tool-list {
                 height: 160px;
@@ -104,12 +155,15 @@
                 }
             }
             .end-btn {
-                height: 40px;
                 background-color: #EB5757;
-                border-radius: 20px;
-                border: none;
-                color: #fff;
             }
         }
     }
+}
+
+.radius-btn {
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    color: #fff;
 }

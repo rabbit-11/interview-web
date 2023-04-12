@@ -15,7 +15,8 @@ export const useUserStore = defineStore({
     actions: {
         setUserInfo(user: userState): void {
             this.$reset();
-            assign(this, user.user);
+            // assign(this, user.user);
+            this.username = user.user;
             Cookies.set("username", this.username);
             if (user.access_token) {
                 Cookies.set("access_token", user.access_token);

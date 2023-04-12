@@ -7,8 +7,9 @@ import Cookies from "js-cookie";
 axios.interceptors.request.use(
     (config: any) => {
         const token = Cookies.get("access_token");
-        if (token && config.url && config.url.indexOf("unity") >= 0) {
+        if (token && config.url && config.url.indexOf("login") === -1) {
             config.headers.Authorization = "Bearer " + token;
+            console.log(config.headers.Authorization)
         }
         return config;
     },

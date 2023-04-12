@@ -1,7 +1,17 @@
 <template>
     <article class="interview">
-        <section class="code">
-            <div class="coder"></div>
+        <section class="code" :style="codeExpand ? 'width:100%' : ''">
+            <div class="coder">
+                <CodeMirrow v-model="codeRef" default-value="" :read-only="readOnly" />
+                <a-button class="submit-btn radius-btn" @click="submitCode">Submit code</a-button>
+                <a-button v-if="!codeExpand" class="expand-btn" @click="codeExpand = true">></a-button>
+                <a-button v-else class="toggle-btn" @click="codeExpand = false">&lt;</a-button>
+                <div class="video-box">
+                    <video ref="vid">
+
+                    </video>
+                </div>
+            </div>
             <div class="toolbar">
                 <div class="tool-list">
                     <a-button class="tool-btn">
@@ -17,7 +27,7 @@
                         <img :src="commenturl">
                     </a-button>
                 </div>
-                <a-button class="end-btn">
+                <a-button class="end-btn radius-btn">
                     End Call
                 </a-button>
             </div>
@@ -37,9 +47,12 @@
             <div class="send-box">
                 <a-textarea
                     v-model:value="sendValue"
-                    placeholder="Write your message...."
+                    placeholder=""
                     @pressEnter="send"
                 />
+                <a-button class="send-btn radius-btn" @click="send">
+                    send
+                </a-button>
             </div>
         </section>
     </article>
@@ -48,13 +61,10 @@
 import { onMounted, ref } from 'vue';
 import './index.scss';
 import service from './service';
-import { useUserStore } from '@/store/modules/user';
 import router from '@/router';
-const audiourl = require("@/assets/images/interview/audio.svg");
-const cameraurl = require("@/assets/images/interview/camera.svg");
-const soundurl = require("@/assets/images/interview/sound.svg");
-const commenturl = require("@/assets/images/interview/comment.svg");
-
+import Cookies from 'js-cookie';
+import CodeMirrow from '@/components/codeMirror/index.vue';
+// import * as CodeMirror from 'codemirror';
 type Message = {
     target: string,
     message: string,
@@ -62,24 +72,36 @@ type Message = {
     name: string
 }
 
-const store = useUserStore();
+const audiourl = require("@/assets/images/interview/audio.svg");
+const cameraurl = require("@/assets/images/interview/camera.svg");
+const soundurl = require("@/assets/images/interview/sound.svg");
+const commenturl = require("@/assets/images/interview/comment.svg");
+
 const sendValue = ref("");
 const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
 recognition.continuous = true;
 recognition.lang = 'en-GB';
-        
-console.log(recognition)
+const codeRef = ref<string>('');
+const readOnly = ref(false);
+const codeExpand = ref(false);
+const vid = ref();
+
 const messageList = ref<Message[]>([]);
 
 const send = (e: any) => {
     e.preventDefault()
+    sendMessage(sendValue.value);
+    sendValue.value = "";
+}
+
+const sendMessage = (message: string) => {
     messageList.value.push({
         target: "user",
-        message: sendValue.value,
+        message: message,
         time: "11:01 AM",
         name: "Andrew"
     })
-    service.postMessage(sendValue.value).then((res: any) => {
+    service.postMessage(message).then((res: any) => {
         if(res.code === 1) {
             let timer = setInterval(async () => {
                 let data = await service.getMessage();
@@ -95,23 +117,49 @@ const send = (e: any) => {
             }, 1000)
         }
     })
-    sendValue.value = "";
 }
 
 recognition.onresult = function (event: any) {
     sendValue.value = event.results[0][0].transcript;
 }
 
+const submitCode = () => {
+    console.log()
+    sendMessage(codeRef.value.split('\n').join('\n'));
+}
+
 onMounted(() => {
-    if(store.username === "" || store.username === undefined) {
+    console.log(Cookies.get("username"));
+    if(Cookies.get("username") === "" || Cookies.get("username") === undefined) {
         router.push({name: "login"});
     }
     recognition.start();
     recognition.continuous = true;
+    // CodeMirror.fromTextArea(coder.value, {
+    //         lineNumbers: true, // 显示行号
+    //     });
+    openCam();
     setTimeout(() => {
         recognition.stop();
         recognition.continuous = false;
     }, 5000);
 })
+
+const openCam = function() {
+    const constraints = {
+        video: true,
+        audio: false
+    };
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then(function(stream) {
+        /* 使用这个stream stream */
+        vid.value.src = stream;
+        vid.value.play();
+    })
+    .catch(function(err) {
+        console.log(err);
+        /* 处理error */
+    });
+}
 
 </script>

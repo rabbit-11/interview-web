@@ -1,0 +1,8 @@
+.text {
+    text-align: left;
+}
+
+.CodeMirror {
+    text-align: left;
+    @include size(100%, 100%);
+}
