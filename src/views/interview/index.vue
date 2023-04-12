@@ -148,12 +148,12 @@ onMounted(() => {
 const openCam = function() {
     const constraints = {
         video: true,
-        audio: false
+        audio: true
     };
     navigator.mediaDevices.getUserMedia(constraints)
     .then(function(stream) {
         /* 使用这个stream stream */
-        vid.value.src = stream;
+        vid.value.srcObject = stream;
         vid.value.play();
     })
     .catch(function(err) {
