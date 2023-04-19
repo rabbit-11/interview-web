@@ -22,6 +22,7 @@
             </a-dropdown>
         </div>
     </header>
+    <Login v-if="loginFlag" @close="loginFlag = false"></Login>
 </template>
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
@@ -29,9 +30,11 @@ import './index.scss';
 import router from '@/router';
 import Cookies from 'js-cookie';
 import { useUserStore } from '@/store/modules/user';
+import Login from "@/components/login/index.vue";
 const username = ref(Cookies.get("username"));
 const loginStatus = ref(false);
 const store = useUserStore();
+const loginFlag = ref(false);
 
 const logOut = () => {
     Cookies.remove("username");
@@ -40,7 +43,7 @@ const logOut = () => {
     if(router.currentRoute.value.path === '/interview') router.push({name: "home"});
 }
 const login = () => {
-    router.push({name: 'login'})
+    loginFlag.value = true;
 }
 
 onMounted(() => {

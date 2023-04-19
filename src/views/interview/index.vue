@@ -4,8 +4,8 @@
             <div class="coder">
                 <CodeMirrow v-model="codeRef" default-value="" :read-only="readOnly" />
                 <a-button :class="[{'disable-btn': !sendFlag}, 'submit-btn', 'radius-btn']" @click="submitCode">Submit code</a-button>
-                <!-- <a-button v-if="!codeExpand" class="expand-btn" @click="codeExpand = true">></a-button>
-                <a-button v-else class="toggle-btn" @click="codeExpand = false">&lt;</a-button> -->
+                <!-- <a-button v-if="!codeExpand" class="expand-btn" @click="codeExpand = true">></a-button> -->
+                <a-button v-if="codeExpand" class="toggle-btn" @click="toggle">&lt;</a-button>
                 <div v-show="videoFlag" class="video-box">
                     <video ref="vid"></video>
                 </div>
@@ -105,6 +105,21 @@ const send = (e: any) => {
     }
 }
 
+const toggle = () => {
+    codeExpand.value = false;
+    let resize: HTMLCollectionOf<any> = document.getElementsByClassName('resize');
+    let code: HTMLCollectionOf<any> = document.getElementsByClassName('code');
+    let communicate: HTMLCollectionOf<any> = document.getElementsByClassName('communicate');
+    resize[0].classList.add("action");
+    code[0].classList.add("action");
+    resize[0].style.left = "70%";
+    communicate[0].style.width = "30%";
+    setTimeout(() => {
+        resize[0].classList.remove("action");
+        code[0].classList.remove("action");
+    }, 500);
+}
+
 const dragControllerDiv = () => {
     let resize: HTMLCollectionOf<any> = document.getElementsByClassName('resize');
     let box: HTMLCollectionOf<any> = document.getElementsByClassName('interview');
@@ -121,15 +136,21 @@ const dragControllerDiv = () => {
                 let endX = e.clientX;
                 let moveLen = resize[i].left + (endX - startX); // （endx-startx）=移动的距离。resize[i].left+移动的距离=左边区域最后的宽度
                 let maxT = box[i].clientWidth - resize[i].offsetWidth; // 容器宽度 - 左边区域的宽度 = 右边区域的宽度
+                codeExpand.value = false;
                 if (moveLen < box[i].clientWidth * 0.6) moveLen = box[i].clientWidth * 0.6; // 左边区域的最小宽度为60%
                 if (moveLen > maxT - 300) {
                     moveLen = maxT; //右边区域最小宽度为300px
+                    resize[i].classList.add("action");
+                    code[0].classList.add("action");
+                    setTimeout(() => {
+                        resize[i].classList.remove("action");
+                        code[0].classList.remove("action");
+                    }, 500);
+                    codeExpand.value = true;
                 }
                 resize[i].style.left = moveLen + 'px'; // 设置左侧区域的宽度
-                for (let j = 0; j < code.length; j++) {
-                    code[j].style.width = moveLen + 'px';
-                    communicate[j].style.width = (box[i].clientWidth - moveLen) + 'px';
-                }
+                code[0].style.width = moveLen + 'px';
+                communicate[0].style.width = (box[0].clientWidth - moveLen) + 'px';
             };
             // 鼠标松开事件
             document.onmouseup = function (evt) {

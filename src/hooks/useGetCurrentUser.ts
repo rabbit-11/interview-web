@@ -1,5 +1,5 @@
 import { useUserStore } from "@/store/modules/user";
-import loginService from "@/views/login/service";
+import loginService from "@/components/login/service";
 import { message } from "ant-design-vue";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";

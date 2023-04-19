@@ -37,17 +37,15 @@
         
     </article>
     <Selectpop v-if="popFlag"></Selectpop>
-    <Login v-if="loginFlag"></Login>
+    
 </template>
 <script lang="ts" setup>
 import Footer from "@/components/footer/index.vue";
 import Selectpop from "./components/selectpop/index.vue";
-import Login from "@/components/login/index.vue";
 import './index.scss';
 import router from "@/router";
 import { ref } from "vue";
 const popFlag = ref(false);
-const loginFlag = ref(false);
 
 const toInterview = () => {
     popFlag.value = true;

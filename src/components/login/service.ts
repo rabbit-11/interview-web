@@ -5,13 +5,21 @@ import { userState } from "@/store/modules/user";
 import qs from "qs";
 import Cookies from "js-cookie";
 export class LoginService extends BaseService {
-    @serviceHandler("query", { title: "登陆", showErrorMsg: false, showTip: false })
+    @serviceHandler("query", { title: "登陆", showErrorMsg: true, showTip: true })
     public login(data: { email: string; password: string }): Promise<userState> {
         const params = {
             email: data.email,
             password: data.password
         };
         return this._post("/login", qs.stringify(params), {headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8"}});
+    }
+    @serviceHandler("query", { title: "注册", showErrorMsg: true, showTip: true })
+    public logon(data: { email: string; password: string }): Promise<userState> {
+        const params = {
+            email: data.email,
+            password: data.password
+        };
+        return this._post("/register", qs.stringify(params), {headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8"}});
     }
     // @serviceHandler("query", { title: "获取加密需要的公钥" })
     // public async getPublicKey(): Promise<any> {
