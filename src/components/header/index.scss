@@ -19,7 +19,7 @@ header {
             color: #161929;
         }
     }
-    .login {
+    .login-item {
         @include flex(row);
         &-image {
             @include size(20px, 21px);

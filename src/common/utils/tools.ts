@@ -54,3 +54,11 @@ export const removeQueryString = (name: string) => {
     }
     return "";
 };
+
+export const getTime = (t?: Date) => {
+    let hour = t ? new Date(t).getHours() : new Date().getHours();
+    let minutes = t ? new Date(t).getMinutes() : new Date().getMinutes();
+    let time = hour > 12 ? 'PM' : 'AM';
+    hour = hour > 12 ? hour - 12 : hour;
+    return `${hour}:${minutes} ${time}`;
+}

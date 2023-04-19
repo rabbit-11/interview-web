@@ -1,25 +1,27 @@
 <template>
+    
     <div class="login">
-        <a-card style="width: 300px">
+        <a-card style="width: 400px">
+            <h1>Sign up</h1>
             <a-form
                 :model="formState"
+                layout="vertical"
                 name="basic"
                 :label-col="{ span: 8 }"
-                :wrapper-col="{ span: 16 }"
+                :wrapper-col="{ span: 24 }"
                 autocomplete="off"
                 @finish="onFinish"
                 @finishFailed="onFinishFailed"
             >
                 <a-form-item
-                    label="邮箱"
+                    label="email"
                     name="email"
                     :rules="[{ required: true, message: '请输入你的邮箱' }]"
                 >
                 <a-input v-model:value="formState.email" />
                 </a-form-item>
-
                 <a-form-item
-                    label="Password"
+                    label="password"
                     name="password"
                     :rules="[{ required: true, message: '请输入你的密码!' }]"
                 >
@@ -30,7 +32,7 @@
                     <a-checkbox v-model:checked="formState.remember">Remember me</a-checkbox>
                 </a-form-item> -->
 
-                <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+                <a-form-item :wrapper-col="{ span: 24 }">
                     <a-button type="primary" html-type="submit">Submit</a-button>
                 </a-form-item>
             </a-form>
@@ -67,10 +69,8 @@ const onFinish = (values: any) => {
                 user: formState.email,
                 access_token: res.token
             })
-            console.log("update")
-            router.push({
-                name: "interview"
-            })
+            if(store.enterInterview) router.push({name: "interview"});
+            else router.push({name: "home"});
         } else {
             message.error(res.message);
         }

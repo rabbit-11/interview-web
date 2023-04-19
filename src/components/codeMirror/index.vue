@@ -7,7 +7,9 @@ import { defineComponent, onBeforeUnmount, onMounted, ref, toRefs, watch } from 
 // codemirror基础资源引入
 import _CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
+import "codemirror/mode/clike/clike.js";
 import "codemirror/mode/javascript/javascript.js";
+import "codemirror/mode/python/python.js";
 
 // 折叠资源引入:开始
 import "codemirror/addon/fold/foldgutter.css";
@@ -50,7 +52,10 @@ export default defineComponent({
     setup(props, context) {
         const { modelValue, defaultValue, readOnly } = toRefs(props);
         const codeEditor = ref();
+        
         let editor;
+        let language = localStorage.getItem("programming");
+        console.log(language)
         watch(modelValue, () => {
             if (null != editor && modelValue.value && modelValue.value !== editor.getValue()) {
                 // 触发v-model的双向绑定
@@ -65,7 +70,7 @@ export default defineComponent({
         onMounted(() => {
             editor = CodeMirror.fromTextArea(codeEditor.value, {
                 value: modelValue.value,
-                mime: "text/javascript",
+                mode: language,
                 indentWithTabs: false, // 在缩进时，是否需要把 n*tab宽度个空格替换成n个tab字符，默认为false
                 smartIndent: true, // 自动缩进，设置是否根据上下文自动缩进（和上一行相同的缩进量）。默认为true
                 lineNumbers: true, // 是否在编辑器左侧显示行号

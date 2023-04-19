@@ -17,18 +17,18 @@
     h2 {
         font-style: normal;
         font-weight: 800;
-        font-size: 64px;
+        font-size: .64rem;
         margin:0;
     }
     h3 {
         font-style: normal;
         font-weight: 700;
-        font-size: 48px;
+        font-size: .48rem;
     }
     p {
         font-style: normal;
         font-weight: 400;
-        font-size: 20px;
+        font-size: .20rem;
         margin-bottom: unset;
     }
 }

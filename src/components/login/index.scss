@@ -1,0 +1,26 @@
+.login {
+    @include absolute(50%, unset, unset, 50%);
+    transform: translate(-50%, -50%);
+
+    .ant-row {
+        margin-bottom: 5px;
+    }
+    .ant-form-item-label {
+        label {
+            font-size: 12px;
+            color: rgba(55, 53, 47, 0.65);
+        }
+    }
+    .ant-form-item-label {
+        padding-bottom: 1px;
+    }
+    .ant-btn {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+    
+}

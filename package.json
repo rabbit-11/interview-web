@@ -26,7 +26,7 @@
     "@vueuse/core": "^9.1.0",
     "ant-design-vue": "^3.2.10",
     "axios": "^0.25.0",
-    "codemirror": "^5.65.9",
+    "codemirror": "5.65.12",
     "core-js": "^3.8.3",
     "dayjs": "^1.11.6",
     "halo-math": "^1.0.9",

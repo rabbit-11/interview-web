@@ -9,7 +9,8 @@ export type userState = {
 export const useUserStore = defineStore({
     id: "user",
     state: () => ({
-        username: ""
+        username: "",
+        enterInterview: false
     }),
     getters: {},
     actions: {

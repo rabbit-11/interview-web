@@ -1,0 +1,12 @@
+@import "../../../login/index.scss";
+
+.selectpop {
+    @include size(100%, 100%);
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    z-index: 5;
+    .ant-card {
+        @extend .login;
+    }
+}

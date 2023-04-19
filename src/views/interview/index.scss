@@ -1,9 +1,9 @@
 .interview {
     @include size(100%, 100%);
     .communicate {
-        @include size(40%, 100%);
+        @include size(30%, 100%);
         position: absolute;
-        left: 60%;
+        right: 0;
         .message-box {
             @include size(100%, calc(100% - 160px));
             @include flex(column);
@@ -81,14 +81,29 @@
                 @include absolute(unset, 24px, 12px, unset);
                 background-color: #0060FF;
             }
+            .disable-btn {
+                background-color: #868686;
+                cursor: not-allowed;
+            }
         }
+    }
+
+    .resize{
+        height: 100%;
+        width: 4px;
+        position: absolute;
+        left: 70%;
+        background: #EDF0F6;
+        z-index: 3;
+        cursor: col-resize;
+        user-select: none;
     }
     
     .code {
-        @include size(60%, 100%);
+        @include size(70%, 100%);
         position: absolute;
         z-index: 3;
-        transition: all .2s ease;
+        // transition: all .2s ease;
         .coder {
             @include size(100%, calc(100% - 160px));
             position: relative;
@@ -98,6 +113,10 @@
             .submit-btn {
                 @include absolute(76px, 24px, unset, unset);
                 background-color: #0060FF;
+            }
+            .disable-btn {
+                background-color: #868686;
+                cursor: not-allowed;
             }
             .expand-btn {
                 @include absolute(50%, -16px, unset, unset);
@@ -152,6 +171,9 @@
                         top: 50%;
                         transform: translate(-50%, -50%);
                     }
+                }
+                .selected {
+                    background-color: #0060FF;
                 }
             }
             .end-btn {
