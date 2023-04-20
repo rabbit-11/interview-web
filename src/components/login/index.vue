@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/store/modules/user';
 import './index.scss';
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import service from './service';
 import { message } from 'ant-design-vue';
 import router from '@/router';
@@ -55,6 +55,7 @@ const formState = reactive<FormState>({
     confirmpassword: '',
     // remember: true,
 });
+
 const onFinish = (values: any) => {
     if(status.value === "login") {
         service.login(values).then((res: any) => {

@@ -12,7 +12,7 @@
             </div>
             <div class="toolbar">
                 <div class="tool-list">
-                    <a-button :class="['tool-btn', { 'selected': audioFlag }]" @click="audioFlag = !audioFlag">
+                    <a-button :class="['tool-btn', { 'selected': audioFlag }]" @mousedown="audioFlag = true" @mouseup="audioFlag = false">
                         <img :src="!audioFlag ? audiourl : audiourlSelected">
                     </a-button>
                     <a-button :class="['tool-btn', { 'selected': videoFlag }]" @click="videoFlag = !videoFlag">
@@ -21,9 +21,9 @@
                     <a-button :class="['tool-btn', { 'selected': soundFlag }]" @click="soundFlag = !soundFlag">
                         <img :src="!soundFlag ? soundurl : soundurlSelected">
                     </a-button>
-                    <a-button :class="['tool-btn', { 'selected': commentFlag }]" @click="commentFlag = !commentFlag">
+                    <!-- <a-button :class="['tool-btn', { 'selected': commentFlag }]" @click="commentFlag = !commentFlag">
                         <img :src="!commentFlag ? commenturl : commenturlSelected">
-                    </a-button>
+                    </a-button> -->
                 </div>
                 <a-button class="end-btn radius-btn" @click="router.push({name: 'home'})">
                     End Call
@@ -97,8 +97,8 @@ let mediaStreamTrack: MediaStream;
 
 const messageList = ref<Message[]>([]);
 
-const send = (e: any) => {
-    e.preventDefault()
+const send = (e?: any) => {
+    if(e) e.preventDefault()
     if(sendFlag.value) {
         sendMessage(sendValue.value);
         sendValue.value = "";
@@ -197,6 +197,8 @@ const sendMessage = (message: string) => {
 
 recognition.onresult = function (event: any) {
     sendValue.value = sendValue.value + event.results[0][0].transcript;
+    console.log(sendValue.value)
+    send();
 }
 
 recognition.onerror = function (event: any) {
@@ -212,9 +214,9 @@ const submitCode = () => {
 onMounted(() => {
     console.log(Cookies.get("username"));
     dragControllerDiv();
-    if (Cookies.get("username") === "" || Cookies.get("username") === undefined) {
-        router.push({ name: "login" });
-    }
+    // if (Cookies.get("username") === "" || Cookies.get("username") === undefined) {
+    //     router.push({ name: "login" });
+    // }
 })
 
 const openCam = () => {

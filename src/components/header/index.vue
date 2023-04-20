@@ -31,6 +31,7 @@ import router from '@/router';
 import Cookies from 'js-cookie';
 import { useUserStore } from '@/store/modules/user';
 import Login from "@/components/login/index.vue";
+import PubSub from "pubsub-js";
 const username = ref(Cookies.get("username"));
 const loginStatus = ref(false);
 const store = useUserStore();
@@ -45,10 +46,11 @@ const logOut = () => {
 const login = () => {
     loginFlag.value = true;
 }
-
 onMounted(() => {
     console.log(Cookies.get("username"));
-
+    PubSub.subscribe("login",() => {
+        loginFlag.value = true;
+    })
     loginStatus.value = Cookies.get("username") === "" || Cookies.get("username") === undefined ? false : true;
     console.log(loginStatus.value);
 })

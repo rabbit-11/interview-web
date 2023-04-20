@@ -36,14 +36,13 @@
         <Footer></Footer>
         
     </article>
-    <Selectpop v-if="popFlag"></Selectpop>
+    <Selectpop v-if="popFlag" @close="popFlag = false"></Selectpop>
     
 </template>
 <script lang="ts" setup>
 import Footer from "@/components/footer/index.vue";
 import Selectpop from "./components/selectpop/index.vue";
 import './index.scss';
-import router from "@/router";
 import { ref } from "vue";
 const popFlag = ref(false);
 

@@ -1,6 +1,7 @@
 <template>
     <article class="selectpop">
         <a-card style="width: 400px">
+            <div class="close" @click="close">X</div>
             <a-form
                 :model="formState"
                 layout="vertical"
@@ -86,7 +87,9 @@ import './index.scss';
 import router from '@/router';
 import { useUserStore } from '@/store/modules/user';
 import Cookies from 'js-cookie';
+import PubSub from "pubsub-js";
 const store = useUserStore();
+const emit = defineEmits(["close"]);
 interface FormState {
     language: string;
     programming: string;
@@ -103,6 +106,10 @@ const formState = reactive<FormState>({
     level: 'level1'
 });
 
+const close = () => {
+    emit("close");
+}
+
 const onFinish = (values: any) => {
     console.log('Success:', values);
     localStorage.setItem('language', formState.language);
@@ -115,7 +122,8 @@ const onFinish = (values: any) => {
     }
     else {
         store.enterInterview = true;
-        router.push({name: 'login'});
+        close();
+        PubSub.publish("login");
     }
 }
 </script>
